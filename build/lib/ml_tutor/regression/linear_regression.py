@@ -1,4 +1,4 @@
-from ml_tutor.model import BaseModelRegression
+from visual_ml.model import BaseModelRegression
 
 import time
 import numpy as np

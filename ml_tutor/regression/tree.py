@@ -1,4 +1,4 @@
-from visual_ml.model import BaseModelRegression
+from ml_tutor.model import BaseModelRegression
 
 import pandas as pd
 import matplotlib.pyplot as plt

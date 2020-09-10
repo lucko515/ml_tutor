@@ -1,0 +1,17 @@
+README.md
+setup.py
+ml_tutor/__init__.py
+ml_tutor/model.py
+ml_tutor.egg-info/PKG-INFO
+ml_tutor.egg-info/SOURCES.txt
+ml_tutor.egg-info/dependency_links.txt
+ml_tutor.egg-info/top_level.txt
+ml_tutor/classification/__init__.py
+ml_tutor/classification/knn.py
+ml_tutor/classification/logistic_regression.py
+ml_tutor/classification/tree.py
+ml_tutor/clustering/__init__.py
+ml_tutor/clustering/kmeans.py
+ml_tutor/regression/__init__.py
+ml_tutor/regression/linear_regression.py
+ml_tutor/regression/tree.py

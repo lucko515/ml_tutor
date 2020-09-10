@@ -1,32 +1,34 @@
-from ml_tutor.model import BaseModelClassification
+from visual_ml.model import BaseModelRegression
 
-import random
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
+from sklearn.metrics import mean_squared_error
 
-class DecisionTreeClassification(BaseModelClassification):
 
-	def __init__(self, criterion='gini', max_depth=None, visual_training=True, feature_names=None):
+class DecisionTreeRegression(BaseModelRegression):
+
+	def __init__(self, criterion='mse', max_depth=None, visual_training=True, feature_names=None):
 		"""
-		Defines Decision Tree Classifier model.
+		Defines Decision Tree Regressor model.
 
-		:param criterion: The function to measure the quality of a split. Supported criteria are “gini” for the Gini impurity and “entropy” for the information gain. Note: this parameter is tree-specific. [From Sklearn]
-		:param max_depth: The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples. [From Sklearn]
+		:param criterion:
+		:param max_depth: The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.
 		:param visual_training: If True - the training process will be visualized [NOTE: only in Jupyter Notebook and Google Colab]
 		:param feature_names: List of names for columns in a dataset. (List of strings)
 		"""
-		super(BaseModelClassification, self).__init__()
+		super(BaseModelRegression, self).__init__()
 
 		# Number of classes in the dataset
 		self.predictions = None
-		self.criterion = criterion
-		self.max_depth = max_depth
 
 		# Dataset -> X = features | y = labels/classes
 		self.X = None
 		self.y = None
+
+		# Number of neighbours used to make predictions
+		self.criterion = criterion
+		self.max_depth = max_depth
 
 		# Visualization related parameters
 		self.visual_training = visual_training
@@ -44,15 +46,16 @@ class DecisionTreeClassification(BaseModelClassification):
 		:param y: Target (classes) values (This is what you want to predict)
 		"""
 		self.X = X
+
 		if isinstance(self.X, pd.DataFrame):
 			self.feature_names = self.X.columns
 
 		self.y = y
 
-		from sklearn.tree import DecisionTreeClassifier
+		from sklearn.tree import DecisionTreeRegressor
 
-		self.classifier = DecisionTreeClassifier(criterion=self.criterion, 
-												 max_depth=self.max_depth)
+		self.classifier = DecisionTreeRegressor(criterion=self.criterion,
+		                                        max_depth=self.max_depth)
 
 		self.figure = self.classifier.fit(self.X, self.y)
 
@@ -72,10 +75,10 @@ class DecisionTreeClassification(BaseModelClassification):
 		"""
 		Helper function used to crete real time visualization of the training process.
 		"""
-
 		# Import only relevant libraries for Jupyter Notebook if needed
 		from IPython import display
 		from sklearn import tree
+
 		plt.figure(figsize=(30, 20))
 		tree.plot_tree(self.figure, feature_names=self.feature_names, filled=True, rounded=True)
 		display.display(plt.gcf())
@@ -84,15 +87,15 @@ class DecisionTreeClassification(BaseModelClassification):
 
 	def score(self, real, predicted):
 		"""
-		Return the accuracy computed on real vs. predicted classes.
+		Return the MSE computed on real vs. predicted classes.
 
 		:param real: Expected targets(generally found in the dataset)
-		:param predicted: Predicted classes by the algorithm
+		:param predicted: Predicted values by the algorithm
 
-		:return: Mean accuracy computed on real vs. predicted classes [0. - 1.]
+		:return: Mean squared error computed on real vs. predicted classes [0. - 1.]
 		"""
 		assert len(real) == len(predicted)
-		return sum(real == predicted) / len(real)
+		return mean_squared_error(real, predicted)
 
 	def sklearn_version(self):
 		"""
@@ -109,11 +112,11 @@ class DecisionTreeClassification(BaseModelClassification):
 # If you don't have Sklearn installed execute line below
 # pip install sklearn
 
-# This is how you can import DecisionTreeClassifier using sklearn library
-from sklearn.tree import DecisionTreeClassifier
+# This is how you can import DecisionTreeRegressor using sklearn library
+from sklearn.tree import DecisionTreeRegressor
 
 # Define classifier with selected parameters
-model = DecisionTreeClassifier(criterion='gini', max_depth=None)
+model = DecisionTreeRegressor(criterion='mse', max_depth=None,)
 
 # Train the model using dataset you desire
 model.fit(X_train, y_train)
@@ -143,9 +146,9 @@ print(model.score(X_test, y_test))
 		from IPython.core.getipython import get_ipython
 
 		content = u"""
-# Decision Tree Classifier
+# Decision Tree Regressor
 
-[TBA] Theory for Decision Tree Classifier will be added here in a few days.	
+[TBA] Theory for Decision Tree Regressor will be added here in a few days.	
 """
 		get_ipython().run_cell_magic(u'markdown', u'', content)
 
@@ -160,8 +163,8 @@ print(model.score(X_test, y_test))
 		from IPython.core.getipython import get_ipython
 
 		content = u"""
-# Decision Tree Classifier Interview Questions
+# Decision Tree Regressor Interview Questions
 
-[TBA] Interview questions for Decision Tree Classifier will be added here in a few days.		
+[TBA] Interview questions for Decision Tree Regressor will be added here in a few days.		
 """
 		get_ipython().run_cell_magic(u'markdown', u'', content)

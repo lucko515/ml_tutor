@@ -1,4 +1,4 @@
-from ml_tutor.model import BaseModelClassification
+from visual_ml.model import BaseModelClassification
 
 from sklearn.decomposition import PCA
 import random
