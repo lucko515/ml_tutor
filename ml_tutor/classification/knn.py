@@ -184,6 +184,10 @@ class KNeighbourClassifier(BaseModelClassification):
 
 
 		from IPython.core.getipython import get_ipython
+
+		if super().__is_google_colab__():
+			return "This method is not supported in Google Colab for now :/"
+
 		contents = """
 # If you don't have Sklearn installed execute line below
 # pip install sklearn
@@ -222,7 +226,8 @@ print(model.score(X_test, y_test))
 
 		from IPython.core.getipython import get_ipython
 
-		content = u'''
+		if super().__is_google_colab__():
+			content = u'''
 # K-Nearest Neighbors 
 # NOTE: Temporary holder
 
@@ -259,7 +264,46 @@ Generally, Data scientists choose as an odd number if the number of classes is e
 ## Source for text and images is DataCamp post.		
 		
 '''
-		get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'html', u'', content)
+		else:
+			content = u'''
+# K-Nearest Neighbors 
+# NOTE: Temporary holder
+
+KNN is a non-parametric and lazy learning algorithm. Non-parametric means there is no assumption for underlying data distribution. In other words, the model structure determined from the dataset. This will be very helpful in practice where most of the real world datasets do not follow mathematical theoretical assumptions. Lazy algorithm means it does not need any training data points for model generation. All training data used in the testing phase. This makes training faster and testing phase slower and costlier. Costly testing phase means time and memory. In the worst case, KNN needs more time to scan all data points and scanning all data points will require more memory for storing training data.
+
+## How does the KNN algorithm work?
+
+In KNN, K is the number of nearest neighbors. The number of neighbors is the core deciding factor. K is generally an odd number if the number of classes is 2. When K=1, then the algorithm is known as the nearest neighbor algorithm. This is the simplest case. Suppose P1 is the point, for which label needs to predict. First, you find the one closest point to P1 and then the label of the nearest point assigned to P1.
+
+![](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/Knn_k1_z96jba.png)
+
+Suppose P1 is the point, for which label needs to predict. First, you find the k closest point to P1 and then classify points by majority vote of its k neighbors. Each object votes for their class and the class with the most votes is taken as the prediction. For finding closest similar points, you find the distance between points using distance measures such as Euclidean distance, Hamming distance, Manhattan distance and Minkowski distance. KNN has the following basic steps:
+
+  - Calculate distance
+  - Find closest neighbors
+  - Vote for labels
+  
+
+![](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final1_ibdm8a.png)
+
+## How do you decide the number of neighbors in KNN?
+
+Now, you understand the KNN algorithm working mechanism. At this point, the question arises that How to choose the optimal number of neighbors? And what are its effects on the classifier? The number of neighbors(K) in KNN is a hyperparameter that you need choose at the time of model building. You can think of K as a controlling variable for the prediction model.
+
+Research has shown that no optimal number of neighbors suits all kind of data sets. Each dataset has it's own requirements. In the case of a small number of neighbors, the noise will have a higher influence on the result, and a large number of neighbors make it computationally expensive. Research has also shown that a small amount of neighbors are most flexible fit which will have low bias but high variance and a large number of neighbors will have a smoother decision boundary which means lower variance but higher bias.
+
+Generally, Data scientists choose as an odd number if the number of classes is even. You can also check by generating the model on different values of k and check their performance. You can also try Elbow method here.
+
+![](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final_a1mrv9.png)
+
+
+# To learn more about KNN go to DataCamp post [here](https://www.datacamp.com/community/tutorials/k-nearest-neighbor-classification-scikit-learn?utm_source=adwords_ppc&utm_campaignid=1455363063&utm_adgroupid=65083631748&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=&utm_creative=278443377086&utm_targetid=aud-390929969673:dsa-429603003980&utm_loc_interest_ms=&utm_loc_physical_ms=1028595&gclid=Cj0KCQjw-af6BRC5ARIsAALPIlXXK_ItCNKM3FkFQpSH3oBIPB0Wm5cSs43HCt_qYyjAE8CPqGfUynAaAhYSEALw_wcB)
+
+## Source for text and images is DataCamp post.		
+		
+'''
+			get_ipython().run_cell_magic(u'markdown', u'', content)
 
 	def interview_questions(self):
 		"""
@@ -271,9 +315,17 @@ Generally, Data scientists choose as an odd number if the number of classes is e
 
 		from IPython.core.getipython import get_ipython
 
-		content = u"""
+		if super().__is_google_colab__():
+			content = u"""
+<h1> K-Nearest Neighbors Interview Questions </h1>
+
+[TBA] Interview questions for Logistic Regression will be added here in a few days.		
+"""
+			get_ipython().run_cell_magic(u'html', u'', content)
+		else:
+			content = u"""
 # K-Nearest Neighbors Interview Questions
 
 [TBA] Interview questions for Logistic Regression will be added here in a few days.		
 """
-		get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'markdown', u'', content)

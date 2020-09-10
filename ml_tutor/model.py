@@ -31,6 +31,16 @@ class BaseModelRegression(object):
 		except NameError:
 			return False
 
+	def __is_google_colab__(self):
+		try:
+			shell = get_ipython().__class__.__name__
+			if shell == 'Shell':
+				return True  # Google Colab
+			else:
+				return False  # Other type (?)
+		except NameError:
+			return False
+
 class BaseModelClassification(object):
 
 	def fit(self, X, y):
@@ -62,6 +72,16 @@ class BaseModelClassification(object):
 		except NameError:
 			return False
 
+	def __is_google_colab__(self):
+		try:
+			shell = get_ipython().__class__.__name__
+			if shell == 'Shell':
+				return True  # Google Colab
+			else:
+				return False  # Other type (?)
+		except NameError:
+			return False
+
 
 class BaseModelClustering(object):
 
@@ -85,6 +105,16 @@ class BaseModelClustering(object):
 			elif shell == 'TerminalInteractiveShell':
 				return False  # Terminal running IPython
 			elif shell == 'Shell':
+				return True  # Google Colab
+			else:
+				return False  # Other type (?)
+		except NameError:
+			return False
+
+	def __is_google_colab__(self):
+		try:
+			shell = get_ipython().__class__.__name__
+			if shell == 'Shell':
 				return True  # Google Colab
 			else:
 				return False  # Other type (?)
