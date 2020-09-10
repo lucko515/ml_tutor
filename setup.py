@@ -1,11 +1,10 @@
 from setuptools import setup, find_packages
 
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='ml_tutor',
-      version='0.9',
+      version='0.9.1',
       description='ML Tutor is a Python library that helps you to learn Machine Learning.',
       long_description=long_description,
       long_description_content_type="text/markdown",

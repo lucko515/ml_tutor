@@ -25,7 +25,7 @@ class BaseModelRegression(object):
 			elif shell == 'TerminalInteractiveShell':
 				return False  # Terminal running IPython
 			elif shell == 'Shell':
-				return False  # Google Colab
+				return True  # Google Colab
 			else:
 				return False  # Other type (?)
 		except NameError:
@@ -56,7 +56,7 @@ class BaseModelClassification(object):
 			elif shell == 'TerminalInteractiveShell':
 				return False  # Terminal running IPython
 			elif shell == 'Shell':
-				return False  # Google Colab
+				return True  # Google Colab
 			else:
 				return False  # Other type (?)
 		except NameError:
@@ -85,7 +85,7 @@ class BaseModelClustering(object):
 			elif shell == 'TerminalInteractiveShell':
 				return False  # Terminal running IPython
 			elif shell == 'Shell':
-				return False  # Google Colab
+				return True  # Google Colab
 			else:
 				return False  # Other type (?)
 		except NameError:

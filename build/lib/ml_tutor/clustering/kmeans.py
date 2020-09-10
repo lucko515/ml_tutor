@@ -1,4 +1,4 @@
-from visual_ml.model import BaseModelClustering
+from ml_tutor.model import BaseModelClustering
 
 import time
 import random

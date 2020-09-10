@@ -1,4 +1,4 @@
-from visual_ml.model import BaseModelClassification
+from ml_tutor.model import BaseModelClassification
 
 import random
 import pandas as pd
