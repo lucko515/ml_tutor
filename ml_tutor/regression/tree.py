@@ -107,6 +107,9 @@ class DecisionTreeRegression(BaseModelRegression):
 			print("Supported only in Jupyter Notebook and Google Colab.")
 			return NotImplementedError
 
+		if super().__is_google_colab__():
+			return "This method is not supported in Google Colab for now :/"
+
 		from IPython.core.getipython import get_ipython
 		contents = """
 # If you don't have Sklearn installed execute line below
@@ -144,13 +147,20 @@ print(model.score(X_test, y_test))
 			return NotImplementedError
 
 		from IPython.core.getipython import get_ipython
-
-		content = u"""
+		if super().__is_google_colab__():
+			content = u"""
 # Decision Tree Regressor
 
 [TBA] Theory for Decision Tree Regressor will be added here in a few days.	
 """
-		get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'html', u'', content)
+		else:
+			content = u"""
+# Decision Tree Regressor
+
+[TBA] Theory for Decision Tree Regressor will be added here in a few days.	
+"""
+			get_ipython().run_cell_magic(u'markdown', u'', content)
 
 	def interview_questions(self):
 		"""
@@ -161,10 +171,17 @@ print(model.score(X_test, y_test))
 			return NotImplementedError
 
 		from IPython.core.getipython import get_ipython
-
-		content = u"""
+		if super().__is_google_colab__():
+			content = u"""
 # Decision Tree Regressor Interview Questions
 
 [TBA] Interview questions for Decision Tree Regressor will be added here in a few days.		
 """
-		get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'html', u'', content)
+		else:
+			content = u"""
+# Decision Tree Regressor Interview Questions
+
+[TBA] Interview questions for Decision Tree Regressor will be added here in a few days.		
+"""
+			get_ipython().run_cell_magic(u'markdown', u'', content)

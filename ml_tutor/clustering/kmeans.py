@@ -165,6 +165,8 @@ class KMeans(BaseModelClustering):
 		if not super().__is_visual_on__():
 			print("Supported only in Jupyter Notebook and Google Colab.")
 			return NotImplementedError
+		if super().__is_google_colab__():
+			return "This method is not supported in Google Colab for now :/"
 
 		from IPython.core.getipython import get_ipython
 		contents = """
@@ -200,13 +202,20 @@ predictions = model.predict(X_test)
 			return NotImplementedError
 
 		from IPython.core.getipython import get_ipython
-
-		content = u"""
+		if super().__is_google_colab__():
+			content = u"""
 # K-Means
 
 [TBA] Theory for K-Means will be added here in a few days.		
 """
-		get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'html', u'', content)
+		else:
+			content = u"""
+# K-Means
+
+[TBA] Theory for K-Means will be added here in a few days.		
+"""
+			get_ipython().run_cell_magic(u'markdown', u'', content)
 
 	def interview_questions(self):
 		"""
@@ -218,9 +227,17 @@ predictions = model.predict(X_test)
 
 		from IPython.core.getipython import get_ipython
 
-		content = u"""
+		if super().__is_google_colab__():
+			content = u"""
 # K-Means Interview Questions
 
 [TBA] Interview questions for K-Means will be added here in a few days.		
 """
-		get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'html', u'', content)
+		else:
+			content = u"""
+# K-Means Interview Questions
+
+[TBA] Interview questions for K-Means will be added here in a few days.		
+"""
+			get_ipython().run_cell_magic(u'markdown', u'', content)

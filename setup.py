@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='ml_tutor',
-      version='0.9.2.1',
-      description='ML Tutor is a Python library that helps you to learn Machine Learning.',
+      version='0.9.3',
+      description='ML Tutor : Learn Machine Learning while never leaving the conform of your chosen Python IDE (Jupyter Notebook or Google Colab)',
       long_description=long_description,
       long_description_content_type="text/markdown",
       url='https://github.com/lucko515/ml_tutor',

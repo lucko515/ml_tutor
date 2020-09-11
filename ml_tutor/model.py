@@ -1,5 +1,6 @@
 from IPython.core.getipython import get_ipython
 
+
 class BaseModelRegression(object):
 
 	def fit(self, X, y):
@@ -40,6 +41,7 @@ class BaseModelRegression(object):
 				return False  # Other type (?)
 		except NameError:
 			return False
+
 
 class BaseModelClassification(object):
 
