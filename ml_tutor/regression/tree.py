@@ -138,7 +138,7 @@ print(model.score(X_test, y_test))
 		)
 		shell.payload_manager.write_payload(payload, single=False)
 
-	def how_it_works(self):
+	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
 		"""
@@ -147,7 +147,7 @@ print(model.score(X_test, y_test))
 			return NotImplementedError
 
 		from IPython.core.getipython import get_ipython
-		if super().__is_google_colab__():
+		if not video:
 			content = u"""
 # Decision Tree Regressor
 
@@ -156,9 +156,10 @@ print(model.score(X_test, y_test))
 			get_ipython().run_cell_magic(u'html', u'', content)
 		else:
 			content = u"""
-# Decision Tree Regressor
-
-[TBA] Theory for Decision Tree Regressor will be added here in a few days.	
+<div>
+<h1> Decision Tree - How it works? </h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RmajweUFKvM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 """
 			get_ipython().run_cell_magic(u'markdown', u'', content)
 

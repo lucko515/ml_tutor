@@ -193,7 +193,7 @@ print(model.score(X_test, y_test))
 		)
 		shell.payload_manager.write_payload(payload, single=False)
 
-	def how_it_works(self):
+	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
 		"""
@@ -204,20 +204,78 @@ print(model.score(X_test, y_test))
 
 		from IPython.core.getipython import get_ipython
 
-		if super().__is_google_colab__():
-			content = u"""
-# Logistic Regression
+		if not video:
+			content = ucontent = u"""
+<div>
+<h1>Logistic Regression Explained</h1>
+<br>
+<img src="https://miro.medium.com/max/770/1*QY3CSyA4BzAU6sEPFwp9ZQ.png">
+<br>
+<br>
+<p>
 
-[TBA] Theory for Logistic Regression will be added here in a few days.		
+In the Machine Learning world, Logistic Regression is a kind of parametric classification model, despite having the word ‘regression’ in its name.<br><br>
+This means that logistic regression models are models that have a certain fixed number of parameters that depend on the number of input features, and they output categorical prediction, like for example if a plant belongs to a certain species or not.
+
+In Logistic Regression, we don’t directly fit a straight line to our data like in linear regression. Instead, we fit a S shaped curve, called Sigmoid, to our observations.
+</p>
+<br><br>
+<img src="https://miro.medium.com/max/770/1*44qV8LhNzE5hPnta2PaaHw.png">
+<br><br>
+<p>
+Let's examine this figure closely.
+<br><br>First of all, like we said before, Logistic Regression models are classification models; specifically binary classification models (they can only be used to distinguish between 2 different categories — like if a person is obese or not given its weight, or if a house is big or small given its size). This means that our data has two kinds of observations (Category 1 and Category 2 observations) like we can observe in the figure.
+<br><br>Note: This is a very simple example of Logistic Regression, in practice much harder problems can be solved using these models, using a wide range of features and not just a single one.
+<br><br>Secondly, as we can see, the Y-axis goes from 0 to 1. This is because the sigmoid function always takes as maximum and minimum these two values, and this fits very well our goal of classifying samples in two different categories. By computing the sigmoid function of X (that is a weighted sum of the input features, just like in Linear Regression), we get a probability (between 0 and 1 obviously) of an observation belonging to one of the two categories.
+<br><br>The formula for the sigmoid function is the following:
+<br><br>
+<img src="https://miro.medium.com/max/316/0*59BSXTBcxZcZGtVT">
+<br><br>
+<h2>1) Calculate weighted sum of inputs</h2>
+<img src="https://miro.medium.com/max/271/0*vq7V-FuK9EirWDeN">
+<br><br>
+<h2>2) Calculate the probability of Obese</h2>
+<img src="https://miro.medium.com/max/494/0*p5Yczl6itusXkxN8">
+<br><br>
+Alright, this looks cool and all, but isn’t this meant to be a Machine Learning model? How do we train it? That is a good question. There are multiple ways to train a Logistic Regression model (fit the S shaped line to our data). We can use an iterative optimisation algorithm like Gradient Descent to calculate the parameters of the model (the weights) or we can use probabilistic methods like Maximum likelihood.
+</p>
+<p>
+
+<br><br>
+Once we have used one of these methods to train our model, we are ready to make some predictions. Let's see an example of how the process of training a Logistic Regression model and using it to make predictions would go:
+<br><br>1. First, we would collect a Dataset of patients who have and who have not been diagnosed as obese, along with their corresponding weights.
+
+<br><br>2. After this, we would train our model, to fit our S shape line to the data and obtain the parameters of the model. After training using Maximum Likelihood, we got the following parameters:
+
+<br><br>
+<img src="https://miro.medium.com/max/487/1*sGI7P3PLzVcwWkLTE5Q7mg.png">
+
+<br><br>
+3. Now, we are ready to make some predictions: imagine we got two patients; one is 120 kg and one is 60 kg. Let's see what happens when we plug these numbers into the model:
+
+<br><br>
+<img src="https://miro.medium.com/max/520/1*fCwfXTnE55D_MJWNqhkegQ.png">
+
+
+<br><br>
+<img src="https://miro.medium.com/max/483/1*dwEPZB0Y6wKBvVNoQTLy6A.png">
+</p>
+
+<h1>Author and source:</h1>
+<h2>Author: <a href="https://twitter.com/Jaimezorno">Jaime Zornoza</a></h2>
+<h2>To find more resources go to the source post: <a href="https://towardsdatascience.com/logistic-regression-explained-9ee73cede081">Towards data science post</a></h2>
+
+</div>
 """
 			get_ipython().run_cell_magic(u'html', u'', content)
 		else:
 			content = u"""
-# Logistic Regression
-
-[TBA] Theory for Logistic Regression will be added here in a few days.		
+<div>
+<h1> Logistic Regression - How it works? </h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-la3q9d7AKQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 """
-			get_ipython().run_cell_magic(u'markdown', u'', content)
+			get_ipython().run_cell_magic(u'html', u'', content)
 
 	def interview_questions(self):
 		"""
@@ -229,18 +287,10 @@ print(model.score(X_test, y_test))
 
 		from IPython.core.getipython import get_ipython
 
-		if super().__is_google_colab__():
-			content = u"""
+		content = u"""
 # Logistic Regression Interview Questions
 
 [TBA] Interview questions for Logistic Regression will be added here in a few days.		
 		"""
-			get_ipython().run_cell_magic(u'html', u'', content)
-		else:
-			content = u"""
-# Logistic Regression Interview Questions
-
-[TBA] Interview questions for Logistic Regression will be added here in a few days.		
-"""
-			get_ipython().run_cell_magic(u'markdown', u'', content)
+		get_ipython().run_cell_magic(u'html', u'', content)
 

@@ -211,7 +211,7 @@ print(model.score(X_test, y_test))
 		)
 		shell.payload_manager.write_payload(payload, single=False)
 
-	def how_it_works(self):
+	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
 		"""
@@ -221,18 +221,92 @@ print(model.score(X_test, y_test))
 
 		from IPython.core.getipython import get_ipython
 
-		if super().__is_google_colab__():
+		if not video:
 			content = u"""
-# Linear Regression
+<div>
+<h1>Linear Regression — Understanding the Theory</h1>
+<br>
+<img src="https://miro.medium.com/max/770/0*c39Seo5WzCpU4GAn">
+<br>
+<br>
+<p>
 
-[TBA] Theory for Linear Regression will be added here in a few days.		
+Linear regression is probably the simplest approach for statistical learning. It is a good starting point for more advanced approaches, and in fact, many fancy statistical learning techniques can be seen as an extension of linear regression. Therefore, understanding this simple model will build a good base before moving on to more complex approaches.
+<br><br>
+Linear regression is very good to answer the following questions:<br><br>
+- Is there a relationship between 2 variables?<br>
+- How strong is the relationship?<br>
+- Which variable contributes the most?<br>
+- How accurately can we estimate the effect of each variable?<br>
+- How accurately can we predict the target?<br>
+- Is the relationship linear? (duh)<br>
+- Is there an interaction effect?<br>
+</p>
+
+<p>
+
+<h2>Estimating the coefficients</h2><br><br>
+Let’s assume we only have one variable and one target. Then, linear regression is expressed as:
+<br><br>
+<img src="https://miro.medium.com/max/770/1*B-U6j1vxqqaYjgTZgunxIg@2x.png">
+
+<br><br>
+In the equation above, the betas are the coefficients. These coefficients are what we need in order to make predictions with our model.<br><br>
+So how do we find these parameters?<br><br>
+To find the parameters, we need to minimize the least squares or the sum of squared errors. Of course, the linear model is not perfect and it will not predict all the data accurately, meaning that there is a difference between the actual value and the prediction. The error is easily calculated with:
+<br><br>
+<img src="https://miro.medium.com/max/727/1*ly-QBw2oLDVx9M7MzxkKnw@2x.png">
+<br><br>
+But why are the errors squared?<br><br>
+We square the error, because the prediction can be either above or below the true value, resulting in a negative or positive difference respectively. If we did not square the errors, the sum of errors could decrease because of negative differences and not because the model is a good fit. Also, squaring the errors penalizes large differences, and so the minimizing the squared errors “guarantees” a better model. Let’s take a look at a graph to better understand.
+<br><br>
+<img src="https://miro.medium.com/max/770/1*3CgiH8QI0ZN5LfdmK2t6XQ@2x.png">
+<br><br>
+In the graph above, the red dots are the true data and the blue line is linear model. The grey lines illustrate the errors between the predicted and the true values. The blue line is thus the one that minimizes the sum of the squared length of the grey lines.
+<br><br>After some math that is too heavy for a blog post, you can finally estimate the coefficients with the following equations:<br><br>
+<br><br>
+<img src="https://miro.medium.com/max/614/1*YOiQ9UpR-A2jHvGR6JZwtQ@2x.png"><br><br>
+<img src="https://miro.medium.com/max/339/1*t9rzyx0zh7o5Zx1Y-IQOvg@2x.png">
+<br><br>
+Where x bar and y bar represent the mean.
+<br><br>
+
+<h2>Estimate the relevancy of the coefficients</h2>
+<br><br>
+
+Now that you have coefficients, how can you tell if they are relevant to predict your target?<br><br>
+The best way is to find the p-value. The p-value is used to quantify statistical significance; it allows to tell whether the null hypothesis is to be rejected or not.<br><br>
+The null hypothesis?<br><br>
+For any modelling task, the hypothesis is that there is some correlation between the features and the target. The null hypothesis is therefore the opposite: there is no correlation between the features and the target.<br><br>
+So, finding the p-value for each coefficient will tell if the variable is statistically significant to predict the target. As a general rule of thumb, if the p-value is less than 0.05: there is a strong relationship between the variable and the target.
+<br><br>
+<h2>Assess the accuracy of the model</h2>
+<br><br>
+
+You found out that your variable was statistically significant by finding its p-value. Great!<br><br>
+Now, how do you know if your linear model is any good?<br><br>
+To assess that, we usually use the RSE (residual standard error) and the R² statistic.<br><br>
+
+The first error metric is simple to understand: the lower the residual errors, the better the model fits the data (in this case, the closer the data is to a linear relationship).<br><br>
+As for the R² metric, it measures the proportion of variability in the target that can be explained using a feature X. Therefore, assuming a linear relationship, if feature X can explain (predict) the target, then the proportion is high and the R² value will be close to 1. If the opposite is true, the R² value is then closer to 0.
+<br><br>
+</p>
+
+
+
+<h1>Author and source:</h1>
+<h2>Author: <a target="_blank" href="https://towardsdatascience.com/@marcopeixeiro">Marco Peixeiro</a></h2>
+<h2>To find more resources go to the source of the post: <a target="_blank" href="https://towardsdatascience.com/linear-regression-understanding-the-theory-7e53ac2831b5">Towards data science post</a></h2>
+
+</div>
 """
 			get_ipython().run_cell_magic(u'html', u'', content)
 		else:
 			content = u"""
-# Linear Regression
-
-[TBA] Theory for Linear Regression will be added here in a few days.		
+<div>
+<h1> K-Means - How it works? </h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kHwlB_j7Hkc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 """
 			get_ipython().run_cell_magic(u'markdown', u'', content)
 
@@ -246,17 +320,10 @@ print(model.score(X_test, y_test))
 
 		from IPython.core.getipython import get_ipython
 
-		if super().__is_google_colab__():
-			content = u"""
+		content = u"""
 # Linear Regression Interview Questions
 
 [TBA] Interview questions for Logistic Regression will be added here in a few days.		
 """
-			get_ipython().run_cell_magic(u'html', u'', content)
-		else:
-			content = u"""
-# Linear Regression Interview Questions
+		get_ipython().run_cell_magic(u'html', u'', content)
 
-[TBA] Interview questions for Logistic Regression will be added here in a few days.		
-"""
-			get_ipython().run_cell_magic(u'markdown', u'', content)

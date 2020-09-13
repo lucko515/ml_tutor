@@ -3,6 +3,14 @@ from setuptools import setup, find_packages
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
+install_requires = ["matplotlib>=3.2.1",
+                    "pandas>=0.25.1",
+                    "numpy>=1.18.1",
+                    "ipython>=7.18.1",
+                    "scikit_learn>=0.23.2"
+                    ]
+
 setup(name='ml_tutor',
       version='0.9.3',
       description='ML Tutor : Learn Machine Learning while never leaving the conform of your chosen Python IDE (Jupyter Notebook or Google Colab)',
@@ -12,6 +20,7 @@ setup(name='ml_tutor',
       author='Luka Anicin',
       author_email='luka.anicin@gmail.com',
       license='MIT',
+      install_requires=install_requires,
       packages=find_packages(),
       classifiers=[
             "Programming Language :: Python :: 3",

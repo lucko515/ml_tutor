@@ -193,7 +193,7 @@ predictions = model.predict(X_test)
 		)
 		shell.payload_manager.write_payload(payload, single=False)
 
-	def how_it_works(self):
+	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
 		"""
@@ -202,7 +202,7 @@ predictions = model.predict(X_test)
 			return NotImplementedError
 
 		from IPython.core.getipython import get_ipython
-		if super().__is_google_colab__():
+		if not video:
 			content = u"""
 # K-Means
 
@@ -211,9 +211,10 @@ predictions = model.predict(X_test)
 			get_ipython().run_cell_magic(u'html', u'', content)
 		else:
 			content = u"""
-# K-Means
-
-[TBA] Theory for K-Means will be added here in a few days.		
+<div>
+<h1> K-Means - How it works? </h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZueoXMgCd1c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 """
 			get_ipython().run_cell_magic(u'markdown', u'', content)
 
@@ -227,17 +228,10 @@ predictions = model.predict(X_test)
 
 		from IPython.core.getipython import get_ipython
 
-		if super().__is_google_colab__():
-			content = u"""
+		content = u"""
 # K-Means Interview Questions
 
 [TBA] Interview questions for K-Means will be added here in a few days.		
 """
-			get_ipython().run_cell_magic(u'html', u'', content)
-		else:
-			content = u"""
-# K-Means Interview Questions
+		get_ipython().run_cell_magic(u'html', u'', content)
 
-[TBA] Interview questions for K-Means will be added here in a few days.		
-"""
-			get_ipython().run_cell_magic(u'markdown', u'', content)
