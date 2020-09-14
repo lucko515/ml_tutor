@@ -151,7 +151,7 @@ class LinearRegression(BaseModelRegression):
 			if self.visual_training:
 				X = X[:, self.randn_id]
 
-		if len(X.shape[1]) < 2:
+		if X.shape[1] < 2:
 			X = np.expand_dims(X, axis=1)
 
 		y_pred = np.add(np.multiply(X, self.new_m), self.new_b)
