@@ -214,6 +214,8 @@ print(model.score(X_test, y_test))
 	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
+
+		:param video: Some people prefer video tutorials over reading version. Set this parameter to True if you want video tutorial instead. :)
 		"""
 		if not super().__is_visual_on__():
 			print("Supported only in Jupyter Notebook and Google Colab.")
@@ -321,9 +323,9 @@ As for the R² metric, it measures the proportion of variability in the target t
 		from IPython.core.getipython import get_ipython
 
 		content = u"""
-# Linear Regression Interview Questions
+<h1> Linear Regression Interview Questions </h1>
 
-[TBA] Interview questions for Logistic Regression will be added here in a few days.		
+Quiz like questions: <a href="https://www.analyticsvidhya.com/blog/2017/07/30-questions-to-test-a-data-scientist-on-linear-regression/" target="_blank">link</a>	
 """
 		get_ipython().run_cell_magic(u'html', u'', content)
 

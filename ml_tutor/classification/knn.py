@@ -218,53 +218,68 @@ print(model.score(X_test, y_test))
 	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
+
+		:param video: Some people prefer video tutorials over reading version. Set this parameter to True if you want video tutorial instead. :)
 		"""
 		if not super().__is_visual_on__():
 			print("Supported only in Jupyter Notebook and Google Colab.")
 			return NotImplementedError
 
-
 		from IPython.core.getipython import get_ipython
 
-
 		if not video:
-			content = u'''
-<h1> K-Nearest Neighbors - How it works? </h1>
-# NOTE: Temporary holder
+			content = u"""
+<div>
+<h1>Machine Learning Basics with the K-Nearest Neighbors Algorithm</h1>
+<br>
+<br>
 
-KNN is a non-parametric and lazy learning algorithm. Non-parametric means there is no assumption for underlying data distribution. In other words, the model structure determined from the dataset. This will be very helpful in practice where most of the real world datasets do not follow mathematical theoretical assumptions. Lazy algorithm means it does not need any training data points for model generation. All training data used in the testing phase. This makes training faster and testing phase slower and costlier. Costly testing phase means time and memory. In the worst case, KNN needs more time to scan all data points and scanning all data points will require more memory for storing training data.
+<p>
 
-## How does the KNN algorithm work?
+<h2>K-Nearest Neighbors</h2><br><br>
+The KNN algorithm assumes that similar things exist in close proximity. In other words, similar things are near to each other.
+<br><br>
+<img src="https://miro.medium.com/max/672/1*wW8O-0xVQUFhBGexx2B6hg.png">
 
-In KNN, K is the number of nearest neighbors. The number of neighbors is the core deciding factor. K is generally an odd number if the number of classes is 2. When K=1, then the algorithm is known as the nearest neighbor algorithm. This is the simplest case. Suppose P1 is the point, for which label needs to predict. First, you find the one closest point to P1 and then the label of the nearest point assigned to P1.
+<br><br>
+Notice in the image above that most of the time, similar data points are close to each other. The KNN algorithm hinges on this assumption being true enough for the algorithm to be useful. KNN captures the idea of similarity (sometimes called distance, proximity, or closeness) with some mathematics we might have learned in our childhood— calculating the distance between points on a graph.
+<br><br>Note: An understanding of how we calculate the distance between points on a graph is necessary before moving on. If you are unfamiliar with or need a refresher on how this calculation is done, thoroughly read “Distance Between 2 Points” in its entirety, and come right back.
+<br><br>There are other ways of calculating distance, and one way might be preferable depending on the problem we are solving. However, the straight-line distance (also called the Euclidean distance) is a popular and familiar choice.
+<br><br>
+<h2>The KNN Algorithm</h2> <br><br><br><br>
+    1. Load the data <br><br>
+    2. Initialize K to your chosen number of neighbors <br><br>
+    3. For each example in the data <br><br>
+        3.1 Calculate the distance between the query example and the current example from the data. <br><br>
+        3.2 Add the distance and the index of the example to an ordered collection <br><br>
+    4. Sort the ordered collection of distances and indices from smallest to largest (in ascending order) by the distances <br><br>
+    5. Pick the first K entries from the sorted collection <br><br>
+    6. Get the labels of the selected K entries <br><br>
+    7. If regression, return the mean of the K labels <br><br>
+    8. If classification, return the mode of the K labels <br><br>
+<br><br>
+<h2>Choosing the right value for K</h2> <br><br><br><br>
+To select the K that’s right for your data, we run the KNN algorithm several times with different values of K and choose the K that reduces the number of errors we encounter while maintaining the algorithm’s ability to accurately make predictions when it’s given data it hasn’t seen before.
+<br><br><br><br>Here are some things to keep in mind:
+<br><br>    1. As we decrease the value of K to 1, our predictions become less stable. Just think for a minute, imagine K=1 and we have a query point surrounded by several reds and one green (I’m thinking about the top left corner of the colored plot above), but the green is the single nearest neighbor. Reasonably, we would think the query point is most likely red, but because K=1, KNN incorrectly predicts that the query point is green.
+<br><br>    2. Inversely, as we increase the value of K, our predictions become more stable due to majority voting / averaging, and thus, more likely to make more accurate predictions (up to a certain point). Eventually, we begin to witness an increasing number of errors. It is at this point we know we have pushed the value of K too far.
+<br><br>    3. In cases where we are taking a majority vote (e.g. picking the mode in a classification problem) among labels, we usually make K an odd number to have a tiebreaker.
+<br><br><br><br><h2>Advantages</h2><br><br>
+<br><br>    1. The algorithm is simple and easy to implement.
+<br><br>    2. There’s no need to build a model, tune several parameters, or make additional assumptions.
+<br><br>    3. The algorithm is versatile. It can be used for classification, regression, and search (as we will see in the next section).
+<br><br><br><br><h2>Disadvantages</h2><br><br>
+    1. The algorithm gets significantly slower as the number of examples and/or predictors/independent variables increase.
+</p>
 
-![](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/Knn_k1_z96jba.png)
-
-Suppose P1 is the point, for which label needs to predict. First, you find the k closest point to P1 and then classify points by majority vote of its k neighbors. Each object votes for their class and the class with the most votes is taken as the prediction. For finding closest similar points, you find the distance between points using distance measures such as Euclidean distance, Hamming distance, Manhattan distance and Minkowski distance. KNN has the following basic steps:
-
-  - Calculate distance
-  - Find closest neighbors
-  - Vote for labels
-  
-
-![](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final1_ibdm8a.png)
-
-## How do you decide the number of neighbors in KNN?
-
-Now, you understand the KNN algorithm working mechanism. At this point, the question arises that How to choose the optimal number of neighbors? And what are its effects on the classifier? The number of neighbors(K) in KNN is a hyperparameter that you need choose at the time of model building. You can think of K as a controlling variable for the prediction model.
-
-Research has shown that no optimal number of neighbors suits all kind of data sets. Each dataset has it's own requirements. In the case of a small number of neighbors, the noise will have a higher influence on the result, and a large number of neighbors make it computationally expensive. Research has also shown that a small amount of neighbors are most flexible fit which will have low bias but high variance and a large number of neighbors will have a smoother decision boundary which means lower variance but higher bias.
-
-Generally, Data scientists choose as an odd number if the number of classes is even. You can also check by generating the model on different values of k and check their performance. You can also try Elbow method here.
-
-![](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1531424125/KNN_final_a1mrv9.png)
 
 
-# To learn more about KNN go to DataCamp post [here](https://www.datacamp.com/community/tutorials/k-nearest-neighbor-classification-scikit-learn?utm_source=adwords_ppc&utm_campaignid=1455363063&utm_adgroupid=65083631748&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=&utm_creative=278443377086&utm_targetid=aud-390929969673:dsa-429603003980&utm_loc_interest_ms=&utm_loc_physical_ms=1028595&gclid=Cj0KCQjw-af6BRC5ARIsAALPIlXXK_ItCNKM3FkFQpSH3oBIPB0Wm5cSs43HCt_qYyjAE8CPqGfUynAaAhYSEALw_wcB)
+<h1>Author and source:</h1>
+<h2>Author: <a target="_blank" href="https://twitter.com/onelharrison">Onel Harrison</a></h2>
+<h2>To find more resources go to the source of the post: <a target="_blank" href="https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761">Towards data science post</a></h2>
 
-## Source for text and images is DataCamp post.		
-		
-'''
+</div>
+"""
 			get_ipython().run_cell_magic(u'html', u'', content)
 
 		else:
@@ -286,8 +301,7 @@ Generally, Data scientists choose as an odd number if the number of classes is e
 
 		from IPython.core.getipython import get_ipython
 
-		if super().__is_google_colab__():
-			content = u"""
+		content = u"""
 <h1> K-Nearest Neighbors Interview Questions </h1>
 
 <h2> 1. What is “K” in KNN algorithm? </h2>
@@ -308,12 +322,12 @@ K should be odd so that there are no ties in the voting. If square root of numbe
 </p>
 <h2> 4. What is the difference between Euclidean Distance and Manhattan distance? What is the formula of Euclidean distance and Manhattan distance? </h2>
 <p>
-Both are used to find out the distance between two points. 
+Both are used to find out the distance between two points. <br><br>
   <img src="https://4.bp.blogspot.com/-9iDGWtgrbh0/XErhbogDiBI/AAAAAAAABLE/tAhILG2rJ68Hs88XBSi5PP0Wkxi3F-U2ACLcBGAs/s1600/Euclidean_distance_and_Manhattan_distance.PNG">
-  
-Euclidean Distance and Manhattan Distance Formula
+<br><br><br>
+Euclidean Distance and Manhattan Distance Formula <br><br>
 <img src="https://4.bp.blogspot.com/-Tr6BrJ4mZNw/XErlXGm8xrI/AAAAAAAABLc/ZWSmXXOrQBIyKmeO4DdPvckpUVjDFHW7wCLcBGAs/s1600/Euclidean_distance_and_Manhattan_distance_formula.PNG">
-(Image taken from stackexchange)
+<br><br>
 </p>
 <h2> 5. Why is KNN algorithm called Lazy Learner? </h2>
 <p>
@@ -329,46 +343,4 @@ KNN is also very sensitive to noise in the dataset. If the dataset is large, the
 
 <h3>  Quiz like questions: [<a href="https://www.analyticsvidhya.com/blog/2017/09/30-questions-test-k-nearest-neighbors-algorithm/">link</a>] </h3>
 """
-			get_ipython().run_cell_magic(u'html', u'', content)
-		else:
-			content = u"""
-# K-Nearest Neighbors Interview Questions
-
-## 1. What is “K” in KNN algorithm?
-
-K = Number of nearest neighbors you want to select to predict the class of a given item
-
-## 2. How do we decide the value of "K" in KNN algorithm?
-
-If K is small, then results might not be reliable because noise will have a higher influence on the result. If K is large, then there will be a lot of processing which may adversely impact the performance of the algorithm. So, following is must be considered while choosing the value of K:
-
-a. K should be the square root of n (number of data points in training dataset)
-b. K should be odd so that there are no ties. If square root is even, then add or subtract 1 to it.
-
-## 3. Why is the odd value of “K” preferable in KNN algorithm?
-
-K should be odd so that there are no ties in the voting. If square root of number of data points is even, then add or subtract 1 to it to make it odd.
-
-## 4. What is the difference between Euclidean Distance and Manhattan distance? What is the formula of Euclidean distance and Manhattan distance?
-
-Both are used to find out the distance between two points. 
-![](https://4.bp.blogspot.com/-9iDGWtgrbh0/XErhbogDiBI/AAAAAAAABLE/tAhILG2rJ68Hs88XBSi5PP0Wkxi3F-U2ACLcBGAs/s1600/Euclidean_distance_and_Manhattan_distance.PNG)
-Euclidean Distance and Manhattan Distance Formula
-![](https://4.bp.blogspot.com/-Tr6BrJ4mZNw/XErlXGm8xrI/AAAAAAAABLc/ZWSmXXOrQBIyKmeO4DdPvckpUVjDFHW7wCLcBGAs/s1600/Euclidean_distance_and_Manhattan_distance_formula.PNG)
-(Image taken from stackexchange)
-
-## 5. Why is KNN algorithm called Lazy Learner?
-
-When it gets the training data, it does not learn and make a model, it just stores the data. It does not derive any discriminative function from the training data. It uses the training data when it actually needs to do some prediction. So, KNN does not immediately learn a model, but delays the learning, that is why it is called lazy learner. 
-
-## 6. Why should we not use KNN algorithm for large datasets?
-
-KNN works well with smaller dataset because it is a lazy learner. It needs to store all the data and then makes decision only at run time. It needs to calculate the distance of a given point with all other points. So if dataset is large, there will be a lot of processing which may adversely impact the performance of the algorithm. 
-
-KNN is also very sensitive to noise in the dataset. If the dataset is large, there are chances of noise in the dataset which adversely affect the performance of KNN algorithm.	
-
-### The questions and answers taken from: [link](http://theprofessionalspoint.blogspot.com/2019/01/knn-algorithm-in-machine-learning.html)
-
-### Quiz like questions: [link](https://www.analyticsvidhya.com/blog/2017/09/30-questions-test-k-nearest-neighbors-algorithm/)
-"""
-			get_ipython().run_cell_magic(u'markdown', u'', content)
+		get_ipython().run_cell_magic(u'html', u'', content)

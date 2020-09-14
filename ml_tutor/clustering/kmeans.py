@@ -196,6 +196,8 @@ predictions = model.predict(X_test)
 	def how_it_works(self, video=False):
 		"""
 		Generates theory on how the algorithm works right in the Jupyter Notebook/Google colab.
+
+		:param video: Some people prefer video tutorials over reading version. Set this parameter to True if you want video tutorial instead. :)
 		"""
 		if not super().__is_visual_on__():
 			print("Supported only in Jupyter Notebook and Google Colab.")
@@ -204,9 +206,36 @@ predictions = model.predict(X_test)
 		from IPython.core.getipython import get_ipython
 		if not video:
 			content = u"""
-# K-Means
+<div>
+<h1>Understanding K-means Clustering in Machine Learning</h1>
+<br>
+<br>
 
-[TBA] Theory for K-Means will be added here in a few days.		
+<p>
+
+<br><br>K-means clustering is one of the simplest and popular unsupervised machine learning algorithms.
+<br><br>Typically, unsupervised algorithms make inferences from datasets using only input vectors without referring to known, or labelled, outcomes.
+<br><br>A cluster refers to a collection of data points aggregated together because of certain similarities.
+<br><br>You’ll define a target number k, which refers to the number of centroids you need in the dataset. A centroid is the imaginary or real location representing the center of the cluster.
+<br><br>Every data point is allocated to each of the clusters through reducing the in-cluster sum of squares.
+<br><br>In other words, the K-means algorithm identifies k number of centroids, and then allocates every data point to the nearest cluster, while keeping the centroids as small as possible.
+<br><br>The ‘means’ in the K-means refers to averaging of the data; that is, finding the centroid.
+
+<br><br><br><br><h2>How the K-means algorithm works</h2><br><br>
+<br><br>To process the learning data, the K-means algorithm in data mining starts with a first group of randomly selected centroids, which are used as the beginning points for every cluster, and then performs iterative (repetitive) calculations to optimize the positions of the centroids
+<br><br>It halts creating and optimizing clusters when either:<br><br><br><br>
+    The centroids have stabilized — there is no change in their values because the clustering has been successful.
+    <br><br>The defined number of iterations has been achieved.
+<br><br>
+</p>
+
+
+
+<h1>Author and source:</h1>
+<h2>Author: <a target="_blank" href="https://towardsdatascience.com/@ledumjg">Dr. Michael J. Garbade</a></h2>
+<h2>To find more resources go to the source of the post: <a target="_blank" href="https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1">Towards data science post</a></h2>
+
+</div>
 """
 			get_ipython().run_cell_magic(u'html', u'', content)
 		else:
@@ -229,9 +258,9 @@ predictions = model.predict(X_test)
 		from IPython.core.getipython import get_ipython
 
 		content = u"""
-# K-Means Interview Questions
+<h1> K-Means Interview Questions </h1>
 
-[TBA] Interview questions for K-Means will be added here in a few days.		
+Quiz like questions: <a href="https://www.analyticsvidhya.com/blog/2017/02/test-data-scientist-clustering/" target="_blank">link</a>	
 """
 		get_ipython().run_cell_magic(u'html', u'', content)
 
