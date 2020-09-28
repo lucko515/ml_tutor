@@ -1,5 +1,7 @@
 # ML Tutor v1.0.1
 
+[![Downloads](https://pepy.tech/badge/ml-tutor)](https://pepy.tech/project/ml-tutor)
+
 ML Tutor is a Python library created to help people learn Machine Learning (ML). 
 
 Machine Learning (ML) is pretty hard and especially if you are just starting (been there done that)! 
