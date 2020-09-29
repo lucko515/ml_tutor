@@ -325,7 +325,34 @@ As for the R² metric, it measures the proportion of variability in the target t
 		content = u"""
 <h1> Linear Regression Interview Questions </h1>
 
-Quiz like questions: <a href="https://www.analyticsvidhya.com/blog/2017/07/30-questions-to-test-a-data-scientist-on-linear-regression/" target="_blank">link</a>	
+<h2> 1. Can you list out the critical assumptions of linear regression?</h2>
+<p>
+There are three crucial assumptions one has to make in linear regression. They are,
+<ol>
+<li>It is imperative to have a linear relationship between the dependent and independent A scatter plot can prove handy to check out this fact.</li>
+<li>The independent variables in the dataset should not exhibit any multi-collinearity. In case they do, it should be at the barest minimum. There should be a restriction on their value depending on the domain requirement.</li>
+<li>Homoscedasticity is one of the most critical It states that there should be an equal distribution of errors.</li>
+</ol>
+</p>
+
+<h2> 2. What is the primary difference between R square and adjusted R square?</h2>
+<p>
+In linear regression, you use both these values for model validation. However, there is a clear distinction between the two. R square accounts for the variation of all independent variables on the dependent variable. In other words, it considers each independent variable for explaining the variation. In the case of Adjusted R square, it accounts for the significant variables alone for indicating the percentage of variation in the model. By significant, we refer to the P values less than 0.05.
+</p>
+
+<h2>3. What is the importance of the F-test in a linear model?</h2>
+<p>
+The F-test is a crucial one in the sense that it tests the goodness of the model. When you reiterate the model to improve the accuracy with the changes, the F-test proves its utility in understanding the effect of the overall regression.
+</p>
+
+<h2>4. What are the disadvantages of the linear regression model?</h2>
+<p>
+One of the most significant demerits of the linear model is that it is sensitive and dependent on the outliers. It can affect the overall result. Another notable demerit of the linear model is overfitting. Similarly, underfitting is also a significant disadvantage of the linear model.
+</p>
+
+<h3>  The questions and answers taken from: [<a href="https://www.digitalvidya.com/blog/most-commonly-asked-interview-questions-on-linear-regression">link</a>]</h3>
+
+<h3> Quiz like questions: <a href="https://www.analyticsvidhya.com/blog/2017/07/30-questions-to-test-a-data-scientist-on-linear-regression/" target="_blank">link</a></h3>	
 """
 		get_ipython().run_cell_magic(u'html', u'', content)
 
