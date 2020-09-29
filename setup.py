@@ -11,7 +11,7 @@ install_requires = ["matplotlib>=3.2.1",
                     ]
 
 setup(name='ml_tutor',
-      version='1.0.0.1',
+      version='1.0.2',
       description='ML Tutor : Learn Machine Learning while never leaving the conform of your Python IDE (Jupyter Notebook or Google Colab)',
       long_description=long_description,
       long_description_content_type="text/markdown",
