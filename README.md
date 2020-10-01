@@ -16,6 +16,17 @@ Use ML Tutor if you are looking to:
 - Learn most popular Machine Learning algorithms directly from Jupyter Notebook or Google Colab
 - Visualize what's happening with your data (Educational purpose only)
 
+The following ML algorithms are available in the package:
+
+- **Classification**
+  - K Nearest Neighbor
+  - Logistic Regression
+  - Decision Tree
+- **Clustering**
+  - K-Means Clustering
+- **Regression**
+  - Linear Regression
+  - Decision Tree
 
 ## Usage
 
