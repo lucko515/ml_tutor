@@ -1,4 +1,4 @@
-# ML Tutor v1.0.2
+# ML Tutor v1.0.3
 
 [![Downloads](https://pepy.tech/badge/ml-tutor)](https://pepy.tech/project/ml-tutor)
 
